@@ -10,9 +10,10 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
+
 import { CreateUserDto } from './dto/users.dto';
 import { UsersService } from './users.service';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Users')
 @Controller('users')
@@ -42,7 +43,7 @@ export class UsersController {
   async getById(
     @Req() req: any,
     @Res() res: any,
-    @Param('userId') userId: string,
+    @Param('userId') userId: number,
   ) {
     return res
       .status(HttpStatus.FOUND)
@@ -54,7 +55,7 @@ export class UsersController {
   async deleteUser(
     @Req() req: any,
     @Res() res: any,
-    @Param('userId') userId: string,
+    @Param('userId') userId: number,
   ) {
     return res
       .status(HttpStatus.ACCEPTED)
@@ -65,7 +66,7 @@ export class UsersController {
   async updateUser(
     @Req() req: any,
     @Res() res: any,
-    @Param('userId') userId: string,
+    @Param('userId') userId: number,
     @Body() body: CreateUserDto,
   ) {
     return res

@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { v4 as uuid } from 'uuid';
+
 export class CreateUserDto {
   @ApiProperty({ required: false, example: 'Stefan' })
   @IsString()

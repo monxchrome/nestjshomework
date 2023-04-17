@@ -1,45 +1,52 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/users.dto';
 import { v4 as uuid } from 'uuid';
+import { PrismaService } from '../core/orm/prisma.service';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  private users: any = [];
+  constructor(private prismaService: PrismaService) {}
 
   async getAll() {
-    return this.users;
+    return this.prismaService.user.findMany();
   }
 
-  async getById(userId: string) {
-    return this.users.find((item) => item.id === userId);
+  async getById(userId: number) {
+    return this.prismaService.user.findUnique({
+      where: {
+        id: Number(userId),
+      },
+    });
   }
 
-  async createUser(userData: CreateUserDto) {
-    const id: string = uuid();
-    const newObj = {
-      id: id,
-      ...userData,
-    };
-
-    return this.users.push(newObj);
+  async createUser(userData: CreateUserDto): Promise<User> {
+    return this.prismaService.user.create({
+      data: {
+        name: userData.name,
+        username: userData.username,
+        password: userData.password,
+        age: userData.age,
+        email: userData.email,
+        status: userData.status,
+      },
+    });
   }
 
-  async deleteUser(userId: string) {
-    const user = this.users.find((item) => item.id === userId);
-
-    if (user !== -1) {
-      this.users.splice(user, 1);
-    }
-    return this.users;
+  async deleteUser(userId: number) {
+    return this.prismaService.user.delete({
+      where: {
+        id: Number(userId),
+      },
+    });
   }
 
-  async updateUser(userId: string, updateData) {
-    const id: string = uuid();
-    const indexArr = this.users.findIndex((item) => item.id === userId);
-
-    if (indexArr !== -1) {
-      this.users[indexArr] = { id: id, ...updateData };
-    }
-    return this.users;
+  async updateUser(userId: number, updateData) {
+    return this.prismaService.user.update({
+      where: {
+        id: Number(userId),
+      },
+      data: updateData,
+    });
   }
 }
