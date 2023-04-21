@@ -1,14 +1,7 @@
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateUserDto {
+export class CreateCarDto {
   @ApiProperty({ required: true, example: 'Toyota' })
   @IsString()
   @IsNotEmpty()
@@ -24,13 +17,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   year: number;
 
-  @IsString()
   image: string;
 
-  @IsString()
   type: string;
 
-  @IsString()
   logo: string;
 
   @ApiProperty({ required: true, example: 'true' })

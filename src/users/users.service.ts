@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/users.dto';
-import { v4 as uuid } from 'uuid';
-import { PrismaService } from '../core/orm/prisma.service';
 import { User } from '@prisma/client';
+
+import { PrismaService } from '../core/orm/prisma.service';
+import { CreateUserDto } from './dto/users.dto';
 
 @Injectable()
 export class UsersService {
@@ -29,6 +29,7 @@ export class UsersService {
         age: userData.age,
         email: userData.email,
         status: userData.status,
+        avatar: userData.avatar,
       },
     });
   }

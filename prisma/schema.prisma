@@ -18,6 +18,7 @@ model User {
   age      Int?
   email    String        @unique
   status   Boolean?      @default(false)
+  avatar   String?
   cars     Car[]
 }
 
@@ -26,6 +27,8 @@ model Car {
   brand    String?
   model    String        @unique
   year     Int
+  image    String?
+  logo     String?
   type     String?
   owner    User?         @relation(fields: [ownerId], references: [id])
   ownerId  Int?
