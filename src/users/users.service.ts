@@ -20,6 +20,14 @@ export class UsersService {
     });
   }
 
+  async getByEmail(email: string) {
+    return this.prismaService.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
+  }
+
   async createUser(userData: CreateUserDto): Promise<User> {
     return this.prismaService.user.create({
       data: {
