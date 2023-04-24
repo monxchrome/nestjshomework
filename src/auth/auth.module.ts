@@ -6,8 +6,7 @@ import * as process from 'process';
 import { UsersModule } from '../users/users.module';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
-import { LocalStrategy } from './local.strategy';
+import { BearerStrategy } from './bearer.strategy';
 
 @Module({
   imports: [
@@ -18,7 +17,7 @@ import { LocalStrategy } from './local.strategy';
       signOptions: { expiresIn: '600s' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, UsersService, JwtStrategy],
+  providers: [AuthService, UsersService, BearerStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

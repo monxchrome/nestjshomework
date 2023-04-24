@@ -1,19 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
-import { IsValidDays } from '../decorators/check.days.decorator';
+export class LoginDto {
+  @ApiProperty({ required: true, example: 'stefan@mail.net' })
+  @IsString()
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 
-export class CreateUserDto {
+  @ApiProperty({ required: true, example: '@ASdQwE556!szxc@fkd#' })
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}
+
+export class RegisterDto {
   @ApiProperty({ required: false, example: 'Stefan' })
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   name: string;
 
   @ApiProperty({ required: true, example: 'ssstefan_123' })
@@ -28,7 +32,7 @@ export class CreateUserDto {
 
   @ApiProperty({ required: false, example: 20 })
   @IsNumber()
-  @IsOptional()
+  @IsNotEmpty()
   age: number;
 
   @ApiProperty({ required: true, example: 'stefan@mail.net' })
@@ -37,19 +41,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   email: string;
 
-  @ApiProperty({ required: true, example: 'true' })
-  @IsBoolean()
-  @IsOptional()
-  status: boolean;
-
   @ApiProperty()
+  @IsOptional()
   avatar: string;
-
-  // table for personal
-
-  @ApiProperty()
-  @IsBoolean()
-  @IsOptional()
-  @IsValidDays()
-  dayOff: string;
 }
