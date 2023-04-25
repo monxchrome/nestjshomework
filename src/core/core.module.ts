@@ -9,7 +9,7 @@ import { MailService } from './mail/mail.service';
 @Module({
   imports: [
     MailerModule.forRoot({
-      transport: 'smtp://samokhvalstefan@gmail.com:zsrfO75vdkNcxp0Y@smtp-relay.sendinblue.com:587',
+      transport: process.env.SMTP_EMAIL_SERVER,
       defaults: {
         from: '"nest-modules" <modules@nestjs.com>',
       },
