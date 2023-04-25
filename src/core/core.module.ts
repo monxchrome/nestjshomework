@@ -4,6 +4,8 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import * as path from 'path';
 import * as process from 'process';
 
+import { MailService } from './mail/mail.service';
+
 @Module({
   imports: [
     MailerModule.forRoot({
@@ -20,5 +22,7 @@ import * as process from 'process';
       },
     }),
   ],
+  providers: [MailService],
+  exports: [MailService],
 })
-export class AppModule {}
+export class CoreModule {}

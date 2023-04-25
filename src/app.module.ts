@@ -8,6 +8,8 @@ import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { PassportWrapperModule } from './auth/passport-wrapper.module';
 import { CarsModule } from './cars/cars.module';
+import { CoreModule } from './core/core.module';
+import { MailService } from './core/mail/mail.service';
 import { PrismaModule } from './core/orm/prisma.module';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
@@ -20,6 +22,7 @@ import { UsersService } from './users/users.service';
     PrismaModule,
     AuthModule,
     PassportWrapperModule,
+    CoreModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
